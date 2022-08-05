@@ -1,10 +1,10 @@
 # Il2CppDumper
 
-如果本项目对您造成了影响，请联系：1582421598@badguys.club
+如果本项目对您造成了影响，请联系：cognosphere@proton.me
 
-修改版本的Il2CppDumper，允许你Dump原神的UserAssembly.dll
+修改版本的 Il2CppDumper，允许你 Dump 绝区零的 GameAssembly.dll
 
-仅支持原神2.7及以上版本
+仅支持绝区零
 
 Unity il2cpp逆向工程
 

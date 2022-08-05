@@ -11,7 +11,7 @@ namespace Il2CppDumper
 {
     class Program
     {
-        public static bool IsGenshinMetadata;
+        public static bool IsZZZMetadata;
         public static int StringLiteralsCount;
 
         private static Config config;
@@ -123,15 +123,10 @@ namespace Il2CppDumper
 
         private static bool Init(string il2cppPath, string metadataPath, out Metadata metadata, out Il2Cpp il2Cpp)
         {
+            IsZZZMetadata = true;
+
             Console.WriteLine("Initializing metadata...");
             var metadataBytes = File.ReadAllBytes(metadataPath);
-
-            var lastBlockPointer = metadataBytes.Length - 0x4008;
-            IsGenshinMetadata = BitConverter.ToInt64(metadataBytes, lastBlockPointer) == lastBlockPointer;
-            if (!IsGenshinMetadata)throw new NotSupportedException("ERROR: It not genshin's metadata!");           
-            Console.WriteLine("It genshin's metadata!");
-            metadataBytes = Decrypter.decrypt_global_metadata(metadataBytes, metadataBytes.Length);
-
             metadata = new Metadata(new MemoryStream(metadataBytes));
             Console.WriteLine($"Metadata Version: {metadata.Version}");
 

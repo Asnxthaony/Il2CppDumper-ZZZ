@@ -38,7 +38,7 @@ namespace Il2CppDumper
             this.metadata = metadata;
             this.il2Cpp = il2Cpp;
 
-            if ((il2Cpp.Version >= 27 && il2Cpp.Version < 29) && !Program.IsGenshinMetadata)
+            if ((il2Cpp.Version >= 27 && il2Cpp.Version < 29) && !Program.IsZZZMetadata)
             {
                 customAttributeGenerators = new ulong[metadata.imageDefs.Sum(x => x.customAttributeCount)];
                 foreach (var imageDef in metadata.imageDefs)
@@ -52,7 +52,7 @@ namespace Il2CppDumper
                     }
                 }
             }
-            else if (il2Cpp.Version < 27 || Program.IsGenshinMetadata)
+            else if (il2Cpp.Version < 27 || Program.IsZZZMetadata)
             {
                 customAttributeGenerators = il2Cpp.customAttributeGenerators;
             }
@@ -274,8 +274,12 @@ namespace Il2CppDumper
 
         public Il2CppTypeDefinition GetGenericClassTypeDefinition(Il2CppGenericClass genericClass)
         {
-            if (Program.IsGenshinMetadata)
+            if (Program.IsZZZMetadata)
             {
+                if (genericClass.type == 4294967295)
+                {
+                    return null;
+                }
                 return metadata.typeDefs[genericClass.type];
             }
             if (il2Cpp.Version >= 27)

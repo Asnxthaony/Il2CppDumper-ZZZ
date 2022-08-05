@@ -162,7 +162,7 @@ namespace Il2CppDumper
         [Version(Max = 24)]
         public int customAttributeIndex;
         public int byvalTypeIndex;
-        public int byrefTypeIndex;
+        public int byrefTypeIndex; // [miHoYo]
 
         public int declaringTypeIndex;
         public int parentIndex;
@@ -178,22 +178,22 @@ namespace Il2CppDumper
         public uint flags;
 
         public int fieldStart;
-        public int propertyStart;
         public int methodStart;
         public int eventStart;
+        public int propertyStart;
         public int nestedTypesStart;
         public int interfacesStart;
-        public int interfaceOffsetsStart;
         public int vtableStart;
+        public int interfaceOffsetsStart;
 
-        public ushort event_count;
         public ushort method_count;
         public ushort property_count;
         public ushort field_count;
+        public ushort event_count;
+        public ushort nested_type_count;
         public ushort vtable_count;
         public ushort interfaces_count;
         public ushort interface_offsets_count;
-        public ushort nested_type_count;
 
         // bitfield to portably encode boolean values as single bits
         // 01 - valuetype;
@@ -207,6 +207,7 @@ namespace Il2CppDumper
         // 12 - ClassSize is default
         // 13-16 - One of nine possible PackingSize values (0, 1, 2, 4, 8, 16, 32, 64, or 128) - the specified packing size (even for explicit layouts)
         public uint bitfield;
+        [Version(Min = 19)]
         public uint token;
 
         public bool IsValueType => (bitfield & 0x1) == 1;
@@ -215,26 +216,28 @@ namespace Il2CppDumper
 
     public class Il2CppMethodDefinition
     {
-        public int returnType;
+        public uint nameIndex;
         public int declaringType;
+        public int returnType;
+        public int parameterStart;
         [Version(Max = 24)]
         public int customAttributeIndex;
-        [Version(Max = 24.1f)]
-        public int methodIndex;
-        public uint Padding1;
-        public uint nameIndex;
-        public int parameterStart;
         public int genericContainerIndex;
-        public uint Padding2;
+        [Version(Max = 24.1)]
+        public int methodIndex;
+        [Version(Max = 24.1)]
+        public int invokerIndex;
+        [Version(Max = 24.1)]
+        public int delegateWrapperIndex;
         [Version(Max = 24.1)]
         public int rgctxStartIndex;
         [Version(Max = 24.1)]
         public int rgctxCount;
-        public ushort parameterCount;
-        public ushort flags;
-        public ushort slot;
-        public ushort iflags;
         public uint token;
+        public ushort flags;
+        public ushort iflags;
+        public ushort slot;
+        public ushort parameterCount;
     }
 
     public class Il2CppParameterDefinition
@@ -248,12 +251,14 @@ namespace Il2CppDumper
 
     public class Il2CppFieldDefinition
     {
-        public int typeIndex;
         public uint nameIndex;
+        public int typeIndex;
         [Version(Max = 24)]
         public int customAttributeIndex;
+        [Version(Min = 19)]
         public uint token;
     }
+
 
     public class Il2CppFieldDefaultValue
     {
@@ -265,14 +270,13 @@ namespace Il2CppDumper
     public class Il2CppPropertyDefinition
     {
         public uint nameIndex;
-        public uint Padding1;
-        public uint token;
+        public int get;
+        public int set;
         public uint attrs;
         [Version(Max = 24)]
         public int customAttributeIndex;
-        public uint Padding2;
-        public int set;
-        public int get;
+        [Version(Min = 19)]
+        public uint token;
     }
 
     public class Il2CppCustomAttributeTypeRange

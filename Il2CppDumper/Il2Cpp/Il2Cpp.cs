@@ -146,7 +146,7 @@ namespace Il2CppDumper
             pMetadataRegistration = MapVATR<Il2CppMetadataRegistration>(metadataRegistration);
             genericMethodPointers = MapVATR<ulong>(pCodeRegistration.genericMethodPointers, pCodeRegistration.genericMethodPointersCount);
             invokerPointers = MapVATR<ulong>(pCodeRegistration.invokerPointers, pCodeRegistration.invokerPointersCount);
-            if (Version < 27 || Program.IsGenshinMetadata)
+            if (Version < 27 || Program.IsZZZMetadata)
             {
                 customAttributeGenerators = MapVATR<ulong>(pCodeRegistration.customAttributeGenerators, pCodeRegistration.customAttributeCount);
             }

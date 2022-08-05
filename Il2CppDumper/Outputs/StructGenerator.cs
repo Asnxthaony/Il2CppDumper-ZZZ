@@ -263,7 +263,7 @@ namespace Il2CppDumper
                 json.Addresses[i] = il2Cpp.GetRVA(orderedPointers[i]);
             }
             // 处理MetadataUsage
-            if (Program.IsGenshinMetadata)
+            if (Program.IsZZZMetadata)
             {
                 var sectionHelper = executor.GetSectionHelper();
                 il2Cpp.Position = il2Cpp.MapVATR(sectionHelper.FindGenshinAddress());

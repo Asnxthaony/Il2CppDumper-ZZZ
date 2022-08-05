@@ -43,7 +43,7 @@ namespace Il2CppDumper
         public Metadata(Stream stream) : base(stream)
         {
             var sanity = ReadUInt32();
-            if (Program.IsGenshinMetadata)
+            if (Program.IsZZZMetadata)
             {
                 Version = 27.1;
             }
@@ -120,7 +120,7 @@ namespace Il2CppDumper
             if (Version > 16)
             {
                 fieldRefs = ReadMetadataClassArray<Il2CppFieldRef>(header.fieldRefsOffset, header.fieldRefsSize);
-                if (Program.IsGenshinMetadata)
+                if (Program.IsZZZMetadata)
                 {
                     Program.StringLiteralsCount = stringLiterals.Length;
                     metadataUsageLists = ReadMetadataClassArray<Il2CppMetadataUsageList>(header.metadataUsageListsOffset, header.metadataUsageListsCount);
@@ -278,7 +278,7 @@ namespace Il2CppDumper
 
         public uint GetDecodedMethodIndex(uint index)
         {
-            if (Version >= 27 && !Program.IsGenshinMetadata)
+            if (Version >= 27 && !Program.IsZZZMetadata)
             {
                 return (index & 0x1FFFFFFEU) >> 0x1;
             }

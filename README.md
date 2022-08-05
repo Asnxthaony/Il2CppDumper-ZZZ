@@ -1,10 +1,10 @@
 # Il2CppDumper
 
-If this project affects you, please contact: 1582421598@badguys.club
+If this project affects you, please contact: cognosphere@proton.me
 
-Modified version of Il2CppDumper allows you to dump methods of UserAssembly.dll of the game Genshin Impact
+Modified version of Il2CppDumper allows you to dump methods of GameAssembly.dll of the game Zero Zenless Zone
 
-Only supports Genshin Impact 2.7 and above
+Only supports Zero Zenless Zone
 
 中文说明请戳[这里](README.zh-CN.md)
 
