@@ -120,15 +120,7 @@ namespace Il2CppDumper
             if (Version > 16)
             {
                 fieldRefs = ReadMetadataClassArray<Il2CppFieldRef>(header.fieldRefsOffset, header.fieldRefsSize);
-                if (Program.IsZZZMetadata)
-                {
-                    Program.StringLiteralsCount = stringLiterals.Length;
-                    metadataUsageLists = ReadMetadataClassArray<Il2CppMetadataUsageList>(header.metadataUsageListsOffset, header.metadataUsageListsCount);
-                    metadataUsagePairs = ReadMetadataClassArray<Il2CppMetadataUsagePair>(header.metadataUsagePairsOffset, header.metadataUsagePairsCount);
-
-                    ProcessingGenshinMetadataUsage();
-                }
-                else if (Version < 27)
+                if (Version < 27 || Program.IsZZZMetadata)
                 {
                     metadataUsageLists = ReadMetadataClassArray<Il2CppMetadataUsageList>(header.metadataUsageListsOffset, header.metadataUsageListsCount);
                     metadataUsagePairs = ReadMetadataClassArray<Il2CppMetadataUsagePair>(header.metadataUsagePairsOffset, header.metadataUsagePairsCount);
@@ -254,23 +246,6 @@ namespace Il2CppDumper
             metadataUsagesCount = metadataUsageDic.Max(x => x.Value.Select(y => y.Key).DefaultIfEmpty().Max()) + 1;
         }
 
-        private void ProcessingGenshinMetadataUsage()
-        {
-            metadataUsageDic = new Dictionary<Il2CppMetadataUsage, SortedDictionary<uint, uint>>();
-            for (uint i = 1; i <= 6; i++)
-            {
-                metadataUsageDic[(Il2CppMetadataUsage)i] = new SortedDictionary<uint, uint>();
-            }
-            metadataUsagesCount = metadataUsagePairs.Length;
-            for (int i = 0; i < metadataUsagesCount; i++)
-            {
-                var metadataUsagePair = metadataUsagePairs[i];
-                var usage = GetEncodedIndexType(metadataUsagePair.encodedSourceIndex);
-                var decodedIndex = GetDecodedMethodIndex(metadataUsagePair.encodedSourceIndex);
-                metadataUsageDic[(Il2CppMetadataUsage)usage][metadataUsagePair.destinationIndex] = decodedIndex;
-            }
-        }
-
         public uint GetEncodedIndexType(uint index)
         {
             return (index & 0xE0000000) >> 29;
@@ -278,10 +253,6 @@ namespace Il2CppDumper
 
         public uint GetDecodedMethodIndex(uint index)
         {
-            if (Version >= 27 && !Program.IsZZZMetadata)
-            {
-                return (index & 0x1FFFFFFEU) >> 0x1;
-            }
             return index & 0x1FFFFFFFU;
         }
 

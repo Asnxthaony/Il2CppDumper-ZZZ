@@ -12,7 +12,6 @@ namespace Il2CppDumper
     class Program
     {
         public static bool IsZZZMetadata;
-        public static int StringLiteralsCount;
 
         private static Config config;
 

@@ -26,12 +26,12 @@ namespace Il2CppDumper
         public int interfaceOffsetsSize;
         public uint typeDefinitionsOffset; // Il2CppTypeDefinition
         public int typeDefinitionsSize;
-        public uint rgctxEntriesOffset; // Il2CppRGCTXDefinition
-        public int rgctxEntriesCount;
         public int padding5;
         public int padding6;
         public int padding7;
         public int padding8;
+        public int referencedAssembliesOffset; // int32_t
+        public int referencedAssembliesSize;
         public uint imagesOffset; // Il2CppImageDefinition
         public int imagesSize;
         public uint assembliesOffset; // Il2CppAssemblyDefinition
@@ -44,26 +44,18 @@ namespace Il2CppDumper
         public int fieldAndParameterDefaultValueDataSize;
         public int fieldMarshaledSizesOffset; // Il2CppFieldMarshaledSize
         public int fieldMarshaledSizesSize;
-        public int referencedAssembliesOffset; // int32_t
-        public int referencedAssembliesSize;
+        public int padding9;
+        public int padding10;
         public uint attributesInfoOffset; // Il2CppCustomAttributeTypeRange
         public int attributesInfoCount;
         public uint attributeTypesOffset; // TypeIndex
         public int attributeTypesCount;
-        [Version(Min = 29)]
-        public uint attributeDataOffset;
-        [Version(Min = 29)]
-        public int attributeDataSize;
-        [Version(Min = 29)]
-        public uint attributeDataRangeOffset;
-        [Version(Min = 29)]
-        public int attributeDataRangeSize;
         public int unresolvedVirtualCallParameterTypesOffset; // TypeIndex
         public int unresolvedVirtualCallParameterTypesSize;
         public int unresolvedVirtualCallParameterRangesOffset; // Il2CppRange
         public int unresolvedVirtualCallParameterRangesSize;
-        public int windowsRuntimeTypeNamesOffset; // Il2CppWindowsRuntimeTypeNamePair
-        public int windowsRuntimeTypeNamesSize;
+        public int padding11;
+        public int padding12;
         public int exportedTypeDefinitionsOffset; // TypeDefinitionIndex
         public int exportedTypeDefinitionsSize;
         public uint stringOffset; // string data for metadata
@@ -72,14 +64,14 @@ namespace Il2CppDumper
         public int parametersSize;
         public uint genericParameterConstraintsOffset; // TypeIndex
         public int genericParameterConstraintsSize;
-        public uint windowsRuntimeStringsOffset; // const char*
-        public int windowsRuntimeStringsSize;
+        public int windowsRuntimeTypeNamesOffset; // Il2CppWindowsRuntimeTypeNamePair
+        public int windowsRuntimeTypeNamesSize;
         public uint metadataUsagePairsOffset; // Il2CppMetadataUsagePair
         public int metadataUsagePairsCount;
-        public int padding9;
-        public int padding10;
-        public int padding11;
-        public int padding12;
+        public int padding13;
+        public int padding14;
+        public int padding15;
+        public int padding16;
         public uint fieldRefsOffset; // Il2CppFieldRef
         public int fieldRefsSize;
         public uint eventsOffset; // Il2CppEventDefinition
@@ -92,12 +84,26 @@ namespace Il2CppDumper
         public int parameterDefaultValuesSize;
         public uint fieldDefaultValuesOffset; // Il2CppFieldDefaultValue
         public int fieldDefaultValuesSize;
-        public int padding13;
-        public int padding14;
-        public int padding15;
-        public int padding16;
+        public int padding17;
+        public int padding18;
+        public int padding19;
+        public int padding20;
         public uint metadataUsageListsOffset; // Il2CppMetadataUsageList
         public int metadataUsageListsCount;
+
+        [Version(Max = 24.15f)]
+        public uint rgctxEntriesOffset; // Il2CppRGCTXDefinition
+        [Version(Max = 24.15f)]
+        public int rgctxEntriesCount;
+
+        [Version(Min = 29)]
+        public uint attributeDataOffset;
+        [Version(Min = 29)]
+        public int attributeDataSize;
+        [Version(Min = 29)]
+        public uint attributeDataRangeOffset;
+        [Version(Min = 29)]
+        public int attributeDataRangeSize;
     }
 
     public class Il2CppAssemblyDefinition

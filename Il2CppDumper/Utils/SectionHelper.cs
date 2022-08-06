@@ -181,35 +181,6 @@ namespace Il2CppDumper
             return FindMetadataRegistrationOld();
         }
 
-        public ulong FindGenshinAddress()
-        {
-            foreach (var section in data)
-            {
-                il2Cpp.Position = section.offset;
-                while (il2Cpp.Position < section.offsetEnd - il2Cpp.PointerSize)
-                {
-                    var addr = il2Cpp.Position;
-                    if (il2Cpp.ReadIntPtr() == Program.StringLiteralsCount)
-                    {
-                        try
-                        {
-                            var pointer = il2Cpp.MapVATR(il2Cpp.ReadUIntPtr());
-                            if (CheckPointerRangeDataRa(pointer))
-                            {
-                                return addr - il2Cpp.PointerSize * 6 - section.offset + section.address;
-                            }
-                        }
-                        catch
-                        {
-                            // ignored
-                        }
-                    }
-                    il2Cpp.Position = addr + il2Cpp.PointerSize;
-                }
-            }
-            return 0ul;
-        }
-
         private ulong FindCodeRegistrationOld()
         {
             foreach (var section in data)
